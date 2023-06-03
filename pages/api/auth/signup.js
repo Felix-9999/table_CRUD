@@ -1,4 +1,4 @@
-import connectMongo from '../../../database/conn';
+import connectMongo from '../../../database/';
 import Users from '../../../model/Schema';
 import { hash } from 'bcryptjs';
 
