@@ -34,8 +34,8 @@ export default function AddUserForm({ formData, setFormData }) {
     if (addMutation.isSuccess) return <Success message={"Added Successfully"}></Success>
 
     return (
-        <form className="grid lg:grid-cols-2 w-4/6 gap-4" onSubmit={handleSubmit}>
-            <div className="input-type">
+        <form className="grid lg:grid-cols-2 w-4/6 gap-4 " onSubmit={handleSubmit}>
+            <div className="input-type ">
                 <input type="text" onChange={setFormData} name="firstname" className="border w-full px-5 py-3 focus:outline-none rounded-md" placeholder="FirstName" />
             </div>
             <div className="input-type">

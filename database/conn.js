@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const connectMongo = async () => {
+const connectMongo = async ()  => {
     try {
         const { connection } = await mongoose.connect("mongodb+srv://felix:user@table.e5o1zkb.mongodb.net/");
 

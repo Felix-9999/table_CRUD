@@ -2,7 +2,7 @@ import { BiEdit, BiTrashAlt } from "react-icons/bi";
 import { getUsers } from "../lib/helper";
 import { useQuery } from 'react-query';
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteAction, toggleChangeAction, updateAction } from '../redux/reducer'
+import { toggleChangeAction, updateAction, deleteAction } from '../redux/reducer'
 
 export default function Table() {
 
@@ -11,12 +11,10 @@ export default function Table() {
     if (isLoading) return <div>Employee is Loading...</div>;
     if (isError) return <div>Got Error {error}</div>
 
-
-
     return (
-        <table className="min-w-full table-auto">
+        <table className="w-full table-auto">
             <thead>
-                <tr className="bg-gray-800">
+                <tr className="bg-gray-800 ">
                     <th className="px-16 py-2">
                         <span className="text-gray-200">Name</span>
                     </th>
@@ -37,11 +35,11 @@ export default function Table() {
                     </th>
                 </tr>
             </thead>
-            <tbody className="bg-gray-200">
+            {/* <tbody className="bg-gray-200">
                 {
                     data.map((obj, i) => <Tr {...obj} key={i} />)
                 }
-            </tbody>
+            </tbody> */}
         </table>
     )
 }
@@ -84,7 +82,7 @@ function Tr({ _id, name, avatar, email, salary, date, status }) {
             </td>
             <td className="px-16 py-2 flex justify-around gap-5">
                 <button className="cursor" onClick={onUpdate} ><BiEdit size={25} color={"rgb(34,197,94)"}></BiEdit></button>
-                <button className="cursor" onClick={onDelete}><BiTrashAlt size={25} color={"rgb(244,63,94)"}></BiTrashAlt></button>
+                <button className="cursor" onClick={onDelete} ><BiTrashAlt size={25} color={"rgb(244,63,94)"}></BiTrashAlt></button>
             </td>
         </tr>
     )
