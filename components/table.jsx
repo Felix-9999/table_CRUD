@@ -3,43 +3,32 @@ import { getUsers } from "../lib/helper";
 import { useQuery } from 'react-query';
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleChangeAction, updateAction, deleteAction } from '../redux/reducer'
+import Loading from '../pages/loading';
+import styles from './table.module.css';
 
 export default function Table() {
 
     const { isLoading, isError, data, error } = useQuery('users', getUsers)
-
-    if (isLoading) return <div>Employee is Loading...</div>;
+    console.log(data);
+    if (isLoading) return <Loading />
     if (isError) return <div>Got Error {error}</div>
 
     return (
-        <table className="w-full table-auto">
+        <table className={styles.table}>
             <thead>
-                <tr className="bg-gray-800 ">
-                    <th className="px-16 py-2">
-                        <span className="text-gray-200">Name</span>
-                    </th>
-                    <th className="px-16 py-2">
-                        <span className="text-gray-200">Email</span>
-                    </th>
-                    <th className="px-16 py-2">
-                        <span className="text-gray-200">Salary</span>
-                    </th>
-                    <th className="px-16 py-2">
-                        <span className="text-gray-200">Birthday</span>
-                    </th>
-                    <th className="px-16 py-2">
-                        <span className="text-gray-200">Status</span>
-                    </th>
-                    <th className="px-16 py-2">
-                        <span className="text-gray-200">Actions</span>
-                    </th>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Salary</th>
+                    <th>Birthday</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
-            {/* <tbody className="bg-gray-200">
+            <tbody className="bg-gray-200">
                 {
-                    data.map((obj, i) => <Tr {...obj} key={i} />)
+                    data?.map((obj, i) => <Tr {...obj} key={i} />)
                 }
-            </tbody> */}
+            </tbody>
         </table>
     )
 }
@@ -63,27 +52,18 @@ function Tr({ _id, name, avatar, email, salary, date, status }) {
     }
 
     return (
-        <tr className="bg-gray-50 text-center">
-            <td className="px-16 py-2 flex flex-row items-center">
-                <img src={avatar || '#'} alt="" className="h-8 w-8 rounded-full object-cover" />
-                <span className="text-center ml-2 font-semibold">{name || "Unknown"}</span>
-            </td>
-            <td className="px-16 py-2">
-                <span>{email || "Unknown"}</span>
-            </td>
-            <td className="px-16 py-2">
-                <span>{salary || "Unknown"}</span>
-            </td>
-            <td className="px-16 py-2">
-                <span>{date || "Unknown"}</span>
-            </td>
-            <td className="px-16 py-2">
-                <button className="cursor"><span className={`${status == "Active" ? 'bg-green-500' : 'bg-rose-500'} text-white px-5 py-1 rounded-full`}>{status || "Unknown"}</span></button>
-            </td>
-            <td className="px-16 py-2 flex justify-around gap-5">
-                <button className="cursor" onClick={onUpdate} ><BiEdit size={25} color={"rgb(34,197,94)"}></BiEdit></button>
-                <button className="cursor" onClick={onDelete} ><BiTrashAlt size={25} color={"rgb(244,63,94)"}></BiTrashAlt></button>
-            </td>
+        <tr>
+            <td data-label="Name">{name || "Unknown"}</td>
+            <td data-label="Email">{email || "Unknown"}</td>
+            <td data-label="Salary">{salary || "Unknown"}</td>
+            <td data-label="Birthday">{date || "Unknown"}</td>
+            <td data-label="Actions">
+                <button>
+                    <button className="cursor" onClick={onUpdate} ><BiEdit size={25} color={"rgb(34,197,94)"}></BiEdit>
+                    </button>
+                    <button className="cursor" onClick={onDelete} ><BiTrashAlt size={25} color={"rgb(244,63,94)"}></BiTrashAlt>
+                    </button>
+                </button></td>
         </tr>
     )
 }

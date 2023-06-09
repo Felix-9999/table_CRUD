@@ -4,6 +4,7 @@ import Success from "./success"
 import Bug from "./bug"
 import { useQueryClient, useMutation } from "react-query"
 import { addUser, getUsers } from "../lib/helper"
+import Loading from "../pages/loading"
 
 
 export default function AddUserForm({ formData, setFormData }) {
@@ -29,7 +30,7 @@ export default function AddUserForm({ formData, setFormData }) {
         addMutation.mutate(model)
     }
 
-    if (addMutation.isLoading) return <div>Loading!</div>
+    if (addMutation.isLoading) return <Loading />
     if (addMutation.isError) return <Bug message={addMutation.error.message}></Bug>
     if (addMutation.isSuccess) return <Success message={"Added Successfully"}></Success>
 

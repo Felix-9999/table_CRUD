@@ -1,79 +1,98 @@
 // Controller
 import Users from "../model/tableSchema"
  
-// GET:http://localhost:3000/api/users
-export async function getUsers(req,res){
-try {
-   const users = await Users.find({})
-   
-  if(!users) return res.status(404).json({error:"Date not Found"})
-   res.status(200).json(users)
-} catch (error) {
-    res.status(404).json({error:"error while Featching Date"})
-}
-}
-// GET:http://localhost:3000/api/user/id
-export async function getUser(req,res){
-    try {
-            const {userId} =  req.query
+// get : http://localhost:3000/api/users
+export async function getUsers(req, res) {
+  try {
+    const users = await Users.find({})
 
-            if(userId){
-                const user = await Users.findById(userId)
-                res.status(200).json(user)
-            }
-            res.status(404).json({error:"User not Selected...!"})
-    } catch (error) {
-        res.status(404).json({error:"Can not get User"})
+    if (!users) {
+      return res.status(404).json({ error: "Data not found" });
     }
+
+    return res.status(200).json(users);
+  } catch (error) {
+    return res.status(500).json({ error: "Error while fetching data" });
+  }
 }
 
-// POST:http://localhost:3000/api/users
+// get : http://localhost:3000/api/users/1
+export async function getUser(req, res) {
+  try {
+    const { userId } = req.query;
 
-export async function postUser(req,res){
-    try {
-          const formDate = req.body
-          if(!formDate) return res.status()
-          Users.create(formDate,function(err,date){
-                return res.status(200).json(date)
-          })
-        } catch (error) {
-        return res.status(404).json({error}).json({error:"Form Date Not Provided ..!"}) 
-         
+    if (userId) {
+      const user = await Users.findOne({ _id: userId });
+
+      if (user) {
+        return res.status(200).json(user);
+      } else {
+        return res.status(404).json({ error: "User not found" });
+      }
     }
+
+    return res.status(404).json({ error: "User ID not provided" });
+  } catch (error) {
+    return res.status(500).json({ error: "Error while getting user" });
+  }
 }
 
-// PUT:http://localhost:3000/api/users/id
+// post : http://localhost:3000/api/users
+export async function postUser(req, res) {
+  try {
+    const formData = req.body;
 
-export async function putUser(req,res) {
-    try {
-        const{ userId} =  req.query
-    const formDate =  req.body
-
-    if(userId&&formDate) {
-        await Users.findByIdAndUpdate(userId,formDate)
-        res.status(200).json(formDate)
+    if (!formData) {
+      return res.status(400).json({ error: "Form data not provided" });
     }
-    res.status(404).json({error:"User Not Selected..!"})
 
-    } catch (error) {
-        res.status(404).json({error:"Error while Updating the Date..!"})
-    }
+    const user = await Users.create(formData);
+
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json({ error: "Error while creating user" });
+  }
 }
 
-// DELETE:http://localhost:3000/api/users/id
+// put : http://localhost:3000/api/users/1
+export async function putUser(req, res) {
+  try {
+    const { userId } = req.query;
+    const formData = req.body;
 
-export async function deleteUser(req, res){
-    try {
-        const { userId } = req.query;
-
-        if(userId){
-            const user = await Users.findByIdAndDelete(userId)
-            return res.status(200).json(user)
-        }
-
-        res.status(404).json({ error: "User Not Selected...!"})
-
-    } catch (error) {
-        res.status(404).json({ error: "Error While Deleting the User...!"})
+    if (userId && formData) {
+      const user = await Users.findByIdAndUpdate(userId, formData);
+      
+      if (user) {
+        return res.status(200).json(user);
+      } else {
+        return res.status(404).json({ error: "User not found" });
+      }
     }
+
+    return res.status(404).json({ error: "User ID or form data not provided" });
+  } catch (error) {
+    return res.status(500).json({ error: "Error while updating user" });
+  }
+}
+
+// delete : http://localhost:3000/api/users/1
+export async function deleteUser(req, res) {
+  try {
+    const { userId } = req.query;
+
+    if (userId) {
+      const user = await Users.findByIdAndDelete(userId);
+
+      if (user) {
+        return res.status(200).json(user);
+      } else {
+        return res.status(404).json({ error: "User not found" });
+      }
+    }
+
+    return res.status(404).json({ error: "User ID not provided" });
+  } catch (error) {
+    return res.status(500).json({ error: "Error while deleting user" });
+  }
 }
