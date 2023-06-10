@@ -58,12 +58,11 @@ function Tr({ _id, name, avatar, email, salary, date, status }) {
             <td data-label="Salary">{salary || "Unknown"}</td>
             <td data-label="Birthday">{date || "Unknown"}</td>
             <td data-label="Actions">
-                <button>
-                    <button className="cursor" onClick={onUpdate} ><BiEdit size={25} color={"rgb(34,197,94)"}></BiEdit>
-                    </button>
-                    <button className="cursor" onClick={onDelete} ><BiTrashAlt size={25} color={"rgb(244,63,94)"}></BiTrashAlt>
-                    </button>
-                </button></td>
+                <button className="cursor" onClick={onUpdate} ><BiEdit size={25} color={"rgb(34,197,94)"}></BiEdit>
+                </button>
+                <button className="cursor" onClick={onDelete} ><BiTrashAlt size={25} color={"rgb(244,63,94)"}></BiTrashAlt>
+                </button>
+            </td>
         </tr>
     )
 }

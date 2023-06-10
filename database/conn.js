@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const connectMongo = async ()  => {
     try {
-        const { connection } = await mongoose.connect("mongodb+srv://felix:user@table.e5o1zkb.mongodb.net/");
+        const { connection } = await mongoose.connect(process.env.MONGO_URL_Authentication);
 
         if(connection.readyState == 1){
             return Promise.resolve(true)
