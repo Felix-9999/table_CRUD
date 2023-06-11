@@ -18,8 +18,8 @@ export default async function handler(req, res) {
       case 'PUT':
         putUser(req, res)
         break;
-      case 'DELETE':
-        deleteUser(req, res)
+        case "DELETE" :
+          deleteUser(req,res)
         break;
       default:
         res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);

@@ -51,6 +51,14 @@ function Tr({ _id, name, avatar, email, salary, date, status }) {
         }
     }
 
+    const deleteComent = async id => {
+        const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+            method: "DELETE"
+        })
+        const date = await response.json()
+        console.log(date);
+    }
+
     return (
         <tr>
             <td data-label="Name">{name || "Unknown"}</td>
@@ -62,7 +70,9 @@ function Tr({ _id, name, avatar, email, salary, date, status }) {
                 </button>
                 <button className="cursor" onClick={onDelete} ><BiTrashAlt size={25} color={"rgb(244,63,94)"}></BiTrashAlt>
                 </button>
+                <button onClick={() => deleteComent(_id)}>Delete Coment
+                </button>
             </td>
-        </tr>
+        </tr >
     )
 }
