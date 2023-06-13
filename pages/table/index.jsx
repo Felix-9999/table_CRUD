@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { toggleChangeAction, deleteAction } from "../../redux/reducer"
 import { deleteUser, getUsers } from "../../lib/helper"
 import { useQueryClient } from "react-query"
-
 const Home = () => {
 
   const vidible = useSelector((state) => state.app.client.toggleForm)
@@ -29,7 +28,6 @@ const Home = () => {
   }
 
   const canclehandler = async () => {
-    console.log("censl");
     dispatch(deleteAction(null))
   }
 
@@ -46,6 +44,8 @@ const Home = () => {
           </div>
         </div>
       ) : <></>}
+
+
       <main className="py-5 relative">
         <h1 className='text-xl md:text-5xl text-center font-bold py-10'>Employ Managment</h1>
         <div className="container mx-auto flex justify-between py-5 border-b ">
@@ -59,7 +59,6 @@ const Home = () => {
         <div className="container mx-auto py-5  ">
           {
             vidible ? <Form> </Form> : <></>
-
           }
 
         </div>

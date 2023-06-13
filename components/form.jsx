@@ -14,9 +14,10 @@ export default function Form() {
     const formId = useSelector(state => state.app.client.formId)
 
     return (
-        <div className="container mx-auto ">
-            {formId ? UpdateUserForm({ formId, formData, setFormData }) : AdduserForm({ formData, setFormData })}
-        </div>
+        formId ?
+            UpdateUserForm({ formId, formData, setFormData })
+            : AdduserForm({ formData, setFormData })
+
     )
 
 }
