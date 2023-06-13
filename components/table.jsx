@@ -6,8 +6,10 @@ import { toggleChangeAction, updateAction, deleteAction } from '../redux/reducer
 import Loading from '../pages/loading';
 import styles from './table.module.css';
 import Form from "./form";
+import { useState } from "react";
 
 export default function Table() {
+    const [first, setfirst] = useState(true)
     const formId = useSelector(state => state.app.client.formId)
     const { isLoading, isError, data, error } = useQuery('users', getUsers)
     if (isLoading) return <Loading />
@@ -27,7 +29,6 @@ export default function Table() {
             <tbody className="bg-gray-200">
                 {
                     data?.map((obj, i) => <Tr {...obj} key={i} formId={formId} />)
-
                 }
             </tbody>
         </table >
@@ -74,12 +75,11 @@ function Tr({ _id, name, avatar, email, salary, date, status, formId }) {
                     </button>
                     <button onClick={() => deleteComent(_id)}>Delete Coment
                     </button>
-
+                    {formId && formId === _id &&
+                        <div className=" w-full flex justify-center  content-center items-center"><Form /> </div>
+                    }
                 </td>
             </tr>
-            {formId && formId === _id &&
-                <div className=" w-full flex justify-center  content-center items-center"><Form /> </div>
-            }
         </>
     )
 }

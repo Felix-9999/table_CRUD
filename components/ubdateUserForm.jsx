@@ -34,7 +34,7 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
     }
 
     return (
-        <form className="grid lg:grid-cols-2 w-4/6 gap-4" onSubmit={handleSubmit}>
+        <form className="grid lg:grid-cols-2 w-6/7 gap-6" onSubmit={handleSubmit}>
             <div className="input-type">
                 <input type="text" onChange={setFormData} defaultValue={firstname} name="firstname" className="border w-full px-5 py-3 focus:outline-none rounded-md" placeholder="FirstName" />
             </div>
@@ -52,7 +52,7 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
             </div>
 
 
-            <div className="flex gap-10 items-center">
+            {/* <div className="flex gap-10 items-center">
                 <div className="form-check">
                     <input type="radio" defaultChecked={status == "Active"} onChange={setFormData} value="Active" id="radioDefault1" name="status" className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300  bg-white checked:bg-green-500 checked:border-green-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" />
                     <label htmlFor="radioDefault1" className="inline-block tet-gray-800">
@@ -65,9 +65,9 @@ export default function UpdateUserForm({ formId, formData, setFormData }) {
                         Inactive
                     </label>
                 </div>
-            </div>
+            </div> */}
 
-            <button className="flex justify-center text-md w-2/6 bg-yellow-400 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-green-500 hover:text-green-500">
+            <button className="flex justify-center text-md w-3/6 bg-yellow-400 text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-green-500 hover:text-green-500">
                 Update.... <span className="px-1"><BiBrush size={24}></BiBrush></span>
             </button>
 
