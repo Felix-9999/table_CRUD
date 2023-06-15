@@ -17,7 +17,17 @@ export default function Form() {
         formId ?
             UpdateUserForm({ formId, formData, setFormData })
             : AdduserForm({ formData, setFormData })
+    )
 
+}
+export function Forms() {
+    const [formData, setFormData] = useReducer(formReducer, {})
+    const formId = useSelector(state => state.app.client.formId)
+
+    return (
+
+
+        AdduserForm({ formData, setFormData })
     )
 
 }

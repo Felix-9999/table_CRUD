@@ -2,7 +2,7 @@ import { BiEdit, BiTrashAlt } from "react-icons/bi";
 import { getUsers } from "../lib/helper";
 import { useQuery } from 'react-query';
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleChangeAction, updateAction, deleteAction } from '../redux/reducer'
+import { toggleChangeAction, updateAction, deleteAction, toggleChangeActions } from '../redux/reducer'
 import Loading from '../pages/loading';
 import styles from './table.module.css';
 import Form from "./form";
@@ -41,7 +41,7 @@ function Tr({ _id, name, avatar, email, salary, date, status, formId }) {
     const dispatch = useDispatch()
 
     const onUpdate = () => {
-        dispatch(toggleChangeAction(_id))
+        dispatch(toggleChangeActions(_id))
         if (visible) {
             dispatch(updateAction(_id))
         }
@@ -76,7 +76,11 @@ function Tr({ _id, name, avatar, email, salary, date, status, formId }) {
                     <button onClick={() => deleteComent(_id)}>Delete Coment
                     </button>
                     {formId && formId === _id &&
-                        <div className=" w-full flex justify-center  content-center items-center"><Form /> </div>
+                        <div className=" w-full flex justify-center  content-center items-center">
+                            {
+                                visible ? <Form> </Form> : <></>
+                            }
+                        </div>
                     }
                 </td>
             </tr>

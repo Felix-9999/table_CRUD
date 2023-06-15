@@ -1,15 +1,18 @@
 import Head from "next/head"
 import { BiUserPlus, BiX, BiCheck } from "react-icons/bi"
 import Table from "../../components/table"
-import Form from "../../components/form"
+import Form, { Forms } from "../../components/form"
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { toggleChangeAction, deleteAction } from "../../redux/reducer"
 import { deleteUser, getUsers } from "../../lib/helper"
 import { useQueryClient } from "react-query"
+
 const Home = () => {
 
   const vidible = useSelector((state) => state.app.client.toggleForm)
+  const vidibles = useSelector((state) => state.app.client.toggleForms)
+
 
   const deleteId = useSelector(state => state.app.client.deleteId)
   const queryClient = useQueryClient()
@@ -58,9 +61,8 @@ const Home = () => {
         {/* collapsable form */}
         <div className="container mx-auto py-5  ">
           {
-            vidible ? <Form> </Form> : <></>
+            vidibles ? <Forms> </Forms> : <></>
           }
-
         </div>
         {/* table */}
         <Table></Table>
