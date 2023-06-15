@@ -1,5 +1,5 @@
-import { BiEdit, BiTrashAlt } from "react-icons/bi";
-import { getUsers } from "../lib/helper";
+import { BiEdit, BiTrashAlt, BiX, BiCheck } from "react-icons/bi";
+import { deleteUser, getUsers } from "../lib/helper";
 import { useQuery } from 'react-query';
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleChangeAction, updateAction, deleteAction, toggleChangeActions } from '../redux/reducer'
@@ -7,8 +7,11 @@ import Loading from '../pages/loading';
 import styles from './table.module.css';
 import Form from "./form";
 import { useState } from "react";
+import { useQueryClient } from "react-query"
 
 export default function Table() {
+
+
     const [first, setfirst] = useState(true)
     const formId = useSelector(state => state.app.client.formId)
     const { isLoading, isError, data, error } = useQuery('users', getUsers)
@@ -36,10 +39,12 @@ export default function Table() {
 }
 
 function Tr({ _id, name, avatar, email, salary, date, status, formId }) {
+    const deleteId = useSelector(state => state.app.client.deleteId)
+
 
     const visible = useSelector((state) => state.app.client.toggleForm)
     const dispatch = useDispatch()
-
+    const queryClient = useQueryClient()
     const onUpdate = () => {
         dispatch(toggleChangeActions(_id))
         if (visible) {
@@ -53,12 +58,18 @@ function Tr({ _id, name, avatar, email, salary, date, status, formId }) {
         }
     }
 
-    const deleteComent = async id => {
-        const response = await fetch(`http://localhost:3000/api/users/${id}`, {
-            method: "DELETE"
-        })
-        const date = await response.json()
+    const deletehandler = async () => {
+        if (deleteId) {
+            dispatch(deleteAction(null))
+            await deleteUser(deleteId)
+            await queryClient.prefetchQuery("users", getUsers)
+        }
     }
+
+    const canclehandler = async () => {
+        dispatch(deleteAction(null))
+    }
+
 
     return (
         <>
@@ -73,8 +84,7 @@ function Tr({ _id, name, avatar, email, salary, date, status, formId }) {
                     </button>
                     <button className="cursor" onClick={onDelete} ><BiTrashAlt size={25} color={"rgb(244,63,94)"}></BiTrashAlt>
                     </button>
-                    <button onClick={() => deleteComent(_id)}>Delete Coment
-                    </button>
+
                     {formId && formId === _id &&
                         <div className=" w-full flex justify-center  content-center items-center">
                             {
@@ -82,8 +92,28 @@ function Tr({ _id, name, avatar, email, salary, date, status, formId }) {
                             }
                         </div>
                     }
+                    {deleteId === _id && deleteId ? (
+                        <div className="">
+                            <div className="">
+                                {DeleteComponent({ deletehandler, canclehandler })}
+                            </div>
+                        </div>
+                    ) : <></>}
+
                 </td>
             </tr>
         </>
+    )
+}
+
+function DeleteComponent({ deletehandler, canclehandler }) {
+    return (
+        <div className='flex gap-5'>
+            <button>Are you sure?</button>
+            <button onClick={deletehandler} className='flex bg-red-500 text-white px-4 py-2 border rounded-md hover:bg-rose-500 hover:border-red-500 hover:text-gray-50'>
+                Yes <span className='px-1'><BiX color='rgb(255 255 255)' size={25} /></span></button>
+            <button onClick={canclehandler} className='flex bg-green-500 text-white px-4 py-2 border rounded-md hover:bg-gree-500 hover:border-green-500 hover:text-gray-50'>
+                No <span className='px-1'><BiCheck color='rgb(255 255 255)' size={25} /></span></button>
+        </div>
     )
 }

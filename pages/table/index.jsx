@@ -40,16 +40,16 @@ const Home = () => {
         <title>CRUD</title>
       </Head>
 
-      {deleteId ? (
+      {/* {deleteId ? (
         <div className="w-full h-full absolute  z-10 flex justify-center items-center">
           <div className="w-2/5 h-2/5 bg-gray-500 flex justify-center items-center rounded-lg">
             {DeleteComponent({ deletehandler, canclehandler })}
           </div>
-        </div>
-      ) : <></>}
+        </div >
+      ) : <></>} */}
 
 
-      <main className="py-5 relative">
+      <main className="py-5 relative" >
         <h1 className='text-xl md:text-5xl text-center font-bold py-10'>Employ Managment</h1>
         <div className="container mx-auto flex justify-between py-5 border-b ">
           <div className="left flex gap-3">
@@ -67,7 +67,7 @@ const Home = () => {
         {/* table */}
         <Table></Table>
 
-      </main>
+      </main >
       {/* overflow-x-scroll md:overflow-y-hidden */}
     </section >
   )
