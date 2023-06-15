@@ -108,12 +108,17 @@ function Tr({ _id, name, avatar, email, salary, date, status, formId }) {
 
 function DeleteComponent({ deletehandler, canclehandler }) {
     return (
-        <div className='flex gap-5'>
-            <button>Are you sure?</button>
-            <button onClick={deletehandler} className='flex bg-red-500 text-white px-4 py-2 border rounded-md hover:bg-rose-500 hover:border-red-500 hover:text-gray-50'>
-                Yes <span className='px-1'><BiX color='rgb(255 255 255)' size={25} /></span></button>
-            <button onClick={canclehandler} className='flex bg-green-500 text-white px-4 py-2 border rounded-md hover:bg-gree-500 hover:border-green-500 hover:text-gray-50'>
-                No <span className='px-1'><BiCheck color='rgb(255 255 255)' size={25} /></span></button>
+        <div className='flex gap-2'>
+            <h1 className="text-blue-500">Are you sure?</h1>
+            <button onClick={deletehandler} className='flex bg-red-500 text-white px-1 py-2 hover:border-red-500 hover:text-gray-50'>
+                Yes <span className='px-1'><BiX color='rgb(255 255 255)' size={15} /></span></button>
+            <button onClick={canclehandler} className='flex bg-green-500 text-white px-1 py-2 hover:border-green-500 hover:text-gray-50'>
+                No <span className='px-1'><BiCheck color='rgb(255 255 255)' size={15} /></span></button>
         </div>
     )
 }
+
+
+
+
+// flex bg-green-500 text-white px-4 py-2 border rounded-md hover:bg-gree-500 hover:border-green-500 hover:text-gray-50 no
