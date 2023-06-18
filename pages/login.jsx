@@ -44,12 +44,12 @@ export default function Login() {
 
     // Google Handler function
     async function handleGoogleSignin() {
-        signIn('google', { callbackUrl: "https://crud-7uio2ybyq-felix-9999.vercel.app" })
+        signIn('google', { callbackUrl: "https://crud-7uio2ybyq-felix-9999.vercel.app/" })
     }
 
     // Github Login 
     async function handleGithubSignin() {
-        signIn('github', { callbackUrl: "https://crud-7uio2ybyq-felix-9999.vercel.app" })
+        signIn('github', { callbackUrl: "https://crud-7uio2ybyq-felix-9999.vercel.app/" })
     }
 
     return (
