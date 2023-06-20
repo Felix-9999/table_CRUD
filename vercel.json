@@ -1,0 +1,12 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "server.js", "use": "@vercel/node" },
+      { "src": ".next/**", "use": "@vercel/next" }
+    ],
+    "routes": [
+      { "src": "/api/.*", "dest": "server.js" },
+      { "src": "/(.*)", "dest": ".next/serverless/pages/$1" }
+    ]
+  }
+  
