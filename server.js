@@ -35,9 +35,8 @@ app.prepare().then(() => {
   });
 
   // Start the server
-  const port = process.env.PORT || 3000;
-  server.listen(port, (err) => {
+  server.listen((err) => {
     if (err) throw err;
-    console.log(`> Ready on http://localhost:${port}`);
+    console.log(`> Ready on ${process.env.VERCEL_URL}`);
   });
 });
