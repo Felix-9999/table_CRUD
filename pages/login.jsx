@@ -44,12 +44,12 @@ export default function Login() {
 
     // Google Handler function
     async function handleGoogleSignin() {
-        signIn('google', { callbackUrl: "https://crud-7uio2ybyq-felix-9999.vercel.app" })
+        signIn('google', { callbackUrl: "https://crud-7uio2ybyq-felix-9999.vercel.app/" })
     }
 
     // Github Login 
     async function handleGithubSignin() {
-        signIn('github', { callbackUrl: "https://crud-7uio2ybyq-felix-9999.vercel.app" })
+        signIn('github', { callbackUrl: "https://crud-7uio2ybyq-felix-9999.vercel.app/" })
     }
 
     return (
@@ -117,7 +117,7 @@ export default function Login() {
 
                 {/* bottom */}
                 <p className='text-center text-gray-400 '>
-                    don&apos;t have an account yet? <Link href={'/register'}><a className='text-blue-700'>Sign Up</a></Link>
+                    have an account yet? <Link href={'/register'}><a className='text-blue-700'>Sign Up</a></Link>
                 </p>
             </section>
 
