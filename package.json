@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "node server.js",
     "lint": "next lint",
-    "vercel-build": "next build"
+    "vercel-build": "next build",
+    "vercel-start": "next start",
+    "export": "next export"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
